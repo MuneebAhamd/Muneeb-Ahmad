@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Document</title>
+
+</head>
+
+<style>
+    .table{
+        border: 2px;
+    }
+</style>
+<body  class="container">
+    <h1>Employees</h1>
+    <button onclick="loadData()"> Click to Load Data</button>
+    <table id="table"   class="table table-bordered bg-info" >
+
+    </table>
+
+<script>
+    function loadData() {
+//  console.log('Window Loaded.......');
+ fetch("http://dummy.restapiexample.com/api/v1/employees")
+         .then(result => result.json())
+         .then(json => show(json.data))
+    }
+    function show(employee){
+let table = document.getElementById("table");
+for (let i = 0; i < employee.length; i++) {
+   let obj = employee[i]; 
+   console.log(obj);
+   var row = document.createElement('tr');
+   row.style.border ="2";
+   let id = document.createElement('td');
+   let name = document.createElement('td');
+   let salary = document.createElement('td');
+   let age = document.createElement('td');
+
+   id.innerHTML = obj.id
+   name.innerHTML = obj.employee_name
+   salary.innerHTML = obj.employee_salary
+   age.innerHTML = obj.employee_age
+   row.appendChild(id)
+   row.appendChild(name)
+   row.appendChild(salary)
+   row.appendChild(age)
+
+   table.appendChild(row)
+}
+    }
+   // window.onload = load;
+</script>
+</body>
+</html>
